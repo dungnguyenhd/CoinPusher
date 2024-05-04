@@ -42,7 +42,7 @@ public class TouchReceiver : MonoBehaviour
                     if (hit.transform.tag == "TouchReceiver" && coinLeft > 0)
                     {
                         Vector3 touchPosition = hit.point;
-                        touchPosition.y += 3f;
+                        touchPosition.y += 1.5f;
                         Instantiate(coinPrefab, touchPosition, Quaternion.identity, coinHolder.transform);
                         coinLeft--;
                         UpdateCoinText();
