@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 1131216719525415310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.049, y: 1.2706, z: -2.29}
-  m_LocalScale: {x: 0.6715968, y: 0.07957254, z: 0.6715968}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.07108957, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5181813320229284983}
   m_Father: {fileID: 0}
@@ -53,7 +53,7 @@ Rigidbody:
   m_GameObject: {fileID: 1131216719525415310}
   serializedVersion: 4
   m_Mass: 10000
-  m_Drag: 1
+  m_Drag: 0.5
   m_AngularDrag: 6
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -70,7 +70,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &9213422034112176622
 MeshCollider:
   m_ObjectHideFlags: 0

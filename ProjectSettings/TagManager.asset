@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TouchReceiver
-  - FallingChecker
+  - Prize_Receiver
+  - Lost_Receiver
   layers:
   - Default
   - TransparentFX
