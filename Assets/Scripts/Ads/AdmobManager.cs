@@ -1,8 +1,6 @@
 using UnityEngine;
 using GoogleMobileAds.Api;
 using UnityEngine.UI;
-using System;
-using UnityEngine.SceneManagement;
 
 public class AdmobManager : MonoBehaviour
 {

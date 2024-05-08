@@ -6,7 +6,7 @@ public class Pusher : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Item")
+        if (other.gameObject.CompareTag("Item"))
         {
             other.transform.parent = transform;
         }
@@ -14,9 +14,9 @@ public class Pusher : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Item")
+        if (other.gameObject.CompareTag("Item"))
         {
-            other.transform.parent = TouchReceiver.Instance.coinHolder.transform;
+            other.transform.parent = GameController.Instance.itemHolder.transform;
         }
     }
 }

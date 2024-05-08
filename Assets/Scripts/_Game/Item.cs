@@ -10,20 +10,28 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Kiểm tra xem đối tượng va chạm có tag là trigger mục tiêu không
         if (other.CompareTag("Prize_Receiver"))
         {
             if (isCoin)
             {
-                TouchReceiver.Instance.coinLeft++;
-                TouchReceiver.Instance.UpdateCoinText();
-                Destroy(gameObject);
-                TouchReceiver.Instance.PlayRandomPrizeFX();
+                GameController.Instance.coinLeft++;
+                GameController.Instance.UpdateCoinText();
+                DestroyObject();
+            }
+            else
+            {
+                DestroyObject();
             }
         }
         else if (other.CompareTag("Lost_Receiver"))
         {
             Destroy(gameObject);
         }
+    }
+
+    private void DestroyObject()
+    {
+        Destroy(gameObject);
+        GameController.Instance.PlayRandomPrizeFX();
     }
 }
