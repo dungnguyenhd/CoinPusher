@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class TouchReceiver : MonoBehaviour
 {
     [SerializeField] private GameObject coinPrefab;
-    [SerializeField] private GameObject coinHolder;
+    public GameObject coinHolder;
     [SerializeField] private TMP_Text coinNumText;
+    [SerializeField] private List<ParticleSystem> prizeFX;
     public int coinLeft = 0;
 
     public static TouchReceiver Instance;
@@ -20,6 +22,7 @@ public class TouchReceiver : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
         coinLeft = 100;
         UpdateCoinText();
     }
@@ -55,5 +58,10 @@ public class TouchReceiver : MonoBehaviour
     public void UpdateCoinText()
     {
         coinNumText.text = coinLeft.ToString();
+    }
+
+    public void PlayRandomPrizeFX()
+    {
+        prizeFX[Random.Range(0, prizeFX.Count)].Play();
     }
 }

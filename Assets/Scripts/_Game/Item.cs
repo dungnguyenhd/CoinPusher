@@ -18,6 +18,7 @@ public class Item : MonoBehaviour
                 TouchReceiver.Instance.coinLeft++;
                 TouchReceiver.Instance.UpdateCoinText();
                 Destroy(gameObject);
+                TouchReceiver.Instance.PlayRandomPrizeFX();
             }
         }
         else if (other.CompareTag("Lost_Receiver"))
