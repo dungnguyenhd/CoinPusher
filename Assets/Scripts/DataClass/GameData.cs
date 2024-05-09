@@ -9,9 +9,11 @@ public class GameData
     public int playerLevel;
     public int playerExp;
     public int playerCoin;
-    public int playerDollar;
+    public int playerCash;
     public int dayReward;
-    public int lastOnline;
+    public long lastCoinDropTime;
+
+
     public List<GameStateData> gameplayData = new();
 
     public GameData()
@@ -20,9 +22,9 @@ public class GameData
         playerLevel = 1;
         playerExp = 0;
         playerCoin = 100;
-        playerDollar = 0;
+        playerCash = 0;
         dayReward = 0;
-        lastOnline = 0;
+        lastCoinDropTime = 0;
         gameplayData = new List<GameStateData>();
     }
 
@@ -32,9 +34,9 @@ public class GameData
         playerLevel = gameData.playerLevel;
         playerExp = gameData.playerExp;
         playerCoin = gameData.playerCoin;
-        playerDollar = gameData.playerDollar;
+        playerCash = gameData.playerCash;
         dayReward = gameData.dayReward;
-        lastOnline = gameData.lastOnline;
+        lastCoinDropTime = gameData.lastCoinDropTime;
         gameplayData = gameData.gameplayData;
     }
 }

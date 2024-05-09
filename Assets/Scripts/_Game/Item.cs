@@ -14,14 +14,15 @@ public class Item : MonoBehaviour
         {
             if (isCoin)
             {
-                GameController.Instance.coinLeft++;
-                GameController.Instance.UpdateCoinText();
+                GameManager.Instance.ConsumeCoins(1);
                 DestroyObject();
             }
             else
             {
+                GameController.Instance.GainToys(itemInfo.itemPrefab);
                 DestroyObject();
             }
+            GameController.Instance.DisplayCombo();
         }
         else if (other.CompareTag("Lost_Receiver"))
         {

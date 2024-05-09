@@ -98,5 +98,6 @@ public class UI_Tween_Animation : MonoBehaviour
     void ActiveScreen()
     {
         if (!isMenu && screen != null) screen.SetActive(true);
+        else GameController.Instance.TurnOnGuide();
     }
 }

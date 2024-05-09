@@ -11,6 +11,14 @@ public class GUI_Manager : MonoBehaviour
     [SerializeField] private List<TMP_Text> listCashText;
     [SerializeField] private Slider coinSlider;
     [SerializeField] private Slider expSlider;
+    [SerializeField] private List<TMP_Text> expText;
+    [SerializeField] private List<TMP_Text> coinText;
+    [SerializeField] private List<TMP_Text> cashText;
+    private float fadeDuration = 0.5f;
+    [SerializeField] private float displayDuration = 0.5f;
+    [SerializeField] private float fadeInDuration = 0.5f;
+    [SerializeField] private float fadeOutDuration = 0.5f;
+    [SerializeField] private AnimationCurve fadeCurve;
     public float fillSpeed = 3f;
     private float targetCoinProgress = 0f;
     private float targetExpProgress = 0f;
@@ -32,25 +40,27 @@ public class GUI_Manager : MonoBehaviour
     void Start()
     {
         CoinIncreamentProgress(GameManager.Instance.gameData.playerCoin);
-        StartCoroutine(UpdateSliderValue(coinSlider, targetCoinProgress, true));
-        StartCoroutine(UpdateSliderValue(expSlider, targetExpProgress, true));
+        ExpIncreamentProgress(GameManager.Instance.gameData.playerExp);
+        UpdateCashText();
     }
 
     IEnumerator UpdateSliderValue(Slider slider, float targetValue, bool isIncreasing)
     {
         float currentValue = slider.value;
-        while ((isIncreasing && currentValue < targetValue && currentValue < slider.maxValue) ||
-               (!isIncreasing && currentValue > targetValue && currentValue > slider.minValue))
+        float step = fillSpeed * Time.deltaTime;
+
+        while ((isIncreasing && currentValue < targetValue) ||
+               (!isIncreasing && currentValue > targetValue))
         {
-            float step = fillSpeed * Time.deltaTime;
             if (isIncreasing)
             {
-                currentValue = Mathf.Lerp(currentValue, targetValue, step);
+                currentValue = Mathf.MoveTowards(currentValue, targetValue, step);
             }
             else
             {
-                currentValue = Mathf.Lerp(currentValue, targetValue, step);
+                currentValue = Mathf.MoveTowards(currentValue, targetValue, step);
             }
+
             slider.value = currentValue;
             yield return null;
         }
@@ -65,6 +75,8 @@ public class GUI_Manager : MonoBehaviour
         }
         targetCoinProgress = coinSlider.value + newProgress;
         StartCoroutine(UpdateSliderValue(coinSlider, targetCoinProgress, increasing));
+        UpdateCoinText();
+        DisplayCoinGain(newProgress);
     }
 
     public void ExpIncreamentProgress(int newProgress)
@@ -75,8 +87,10 @@ public class GUI_Manager : MonoBehaviour
             increasing = false;
         }
 
-        targetExpProgress = coinSlider.value + newProgress;
+        targetExpProgress = expSlider.value + newProgress;
         StartCoroutine(UpdateSliderValue(expSlider, targetExpProgress, increasing));
+        UpdateExpText();
+        DisplayExpGain(newProgress);
     }
 
     public void UpdateCoinText()
@@ -87,11 +101,11 @@ public class GUI_Manager : MonoBehaviour
         }
     }
 
-    public void UpdateDollarText()
+    public void UpdateCashText()
     {
         foreach (var text in listCashText)
         {
-            text.text = GameManager.Instance.gameData.playerCoin.ToString();
+            text.text = GameManager.Instance.gameData.playerCash.ToString();
         }
     }
 
@@ -99,7 +113,103 @@ public class GUI_Manager : MonoBehaviour
     {
         foreach (var text in listExpText)
         {
-            text.text = GameManager.Instance.gameData.playerCoin.ToString();
+            text.text = GameManager.Instance.gameData.playerExp.ToString();
+        }
+    }
+
+    public void DisplayExpGain(int amount)
+    {
+        foreach (var text in expText)
+        {
+            if (amount > 0)
+            {
+                text.text = "+" + amount.ToString();
+
+                text.gameObject.SetActive(true);
+
+                LeanTween.value(0f, 1f, fadeInDuration)
+                    .setEase(fadeCurve)
+                    .setOnUpdate((float alpha) =>
+                    {
+                        text.alpha = alpha;
+                    })
+                    .setOnComplete(() =>
+                    {
+                        LeanTween.value(1f, 0f, fadeOutDuration).setEase(fadeCurve)
+                            .setDelay(displayDuration).setOnUpdate((float alpha) =>
+                            {
+                                text.alpha = alpha;
+                            })
+                            .setOnComplete(() =>
+                            {
+                                text.gameObject.SetActive(false);
+                            });
+                    });
+            }
+        }
+    }
+
+    public void DisplayCoinGain(int amount)
+    {
+        foreach (var text in coinText)
+        {
+            if (amount > 0)
+            {
+                text.text = "+" + amount.ToString();
+
+                text.gameObject.SetActive(true);
+
+                LeanTween.value(0f, 1f, fadeInDuration)
+                    .setEase(fadeCurve)
+                    .setOnUpdate((float alpha) =>
+                    {
+                        text.alpha = alpha;
+                    })
+                    .setOnComplete(() =>
+                    {
+                        LeanTween.value(1f, 0f, fadeOutDuration).setEase(fadeCurve)
+                            .setDelay(displayDuration).setOnUpdate((float alpha) =>
+                            {
+                                text.alpha = alpha;
+                            })
+                            .setOnComplete(() =>
+                            {
+                                text.gameObject.SetActive(false);
+                            });
+                    });
+            }
+        }
+    }
+
+    public void DisplayCashGain(int amount)
+    {
+        foreach (var text in cashText)
+        {
+            if (amount > 0)
+            {
+                text.text = "+" + amount.ToString();
+
+                text.gameObject.SetActive(true);
+
+                LeanTween.value(0f, 1f, fadeInDuration)
+                    .setEase(fadeCurve)
+                    .setOnUpdate((float alpha) =>
+                    {
+                        text.alpha = alpha;
+                    })
+                    .setOnComplete(() =>
+                    {
+                        LeanTween.value(1f, 0f, fadeOutDuration).setEase(fadeCurve)
+                            .setDelay(displayDuration).setOnUpdate((float alpha) =>
+                            {
+                                text.alpha = alpha;
+                            })
+                            .setOnComplete(() =>
+                            {
+                                text.gameObject.SetActive(false);
+                            });
+                    });
+            }
         }
     }
 }

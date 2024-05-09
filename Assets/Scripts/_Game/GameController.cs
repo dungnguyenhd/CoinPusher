@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -19,7 +20,13 @@ public class GameController : MonoBehaviour
     [SerializeField] private ItemData itemData;
     [SerializeField] private CollectionData collectionData;
     [SerializeField] private GameObject dropper;
-    public int coinLeft = 0;
+    [SerializeField] private Toys_Gain_Tween_Animation Toys_Gain_Screen;
+    [SerializeField] private Combo_Tween_Animation Combo_Screen;
+    [SerializeField] private GameObject gameGuide;
+
+    private bool isComboing = false;
+    private int comboNum = 0;
+
     public static GameController Instance;
 
     void Awake()
@@ -33,7 +40,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         InitializeGameData();
-        UpdateCoinText();
+        TurnOnGuide();
     }
 
     void Update()
@@ -48,14 +55,13 @@ public class GameController : MonoBehaviour
 
                 if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    if (hit.transform.CompareTag("TouchReceiver") && coinLeft > 0)
+                    if (hit.transform.CompareTag("TouchReceiver") && GameManager.Instance.gameData.playerCoin > 0)
                     {
+                        gameGuide.SetActive(false);
                         Vector3 touchPosition = hit.point;
                         touchPosition.y += 1.5f;
                         Instantiate(coinPrefab, touchPosition, Quaternion.identity, itemHolder.transform);
-                        coinLeft--;
                         GameManager.Instance.ConsumeCoins(-1);
-                        UpdateCoinText();
 
                         int randomChance = Random.Range(0, 101);
 
@@ -67,11 +73,6 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void UpdateCoinText()
-    {
-        coinNumText.text = coinLeft.ToString();
     }
 
     public void PlayRandomPrizeFX()
@@ -95,9 +96,6 @@ public class GameController : MonoBehaviour
     private void InitializeGameData()
     {
         GameData gameData = GameManager.Instance.gameData;
-
-        // Set player coins
-        coinLeft = gameData.playerCoin;
 
         // Generate previous item position
         List<GameStateData> data = gameData.gameplayData;
@@ -148,5 +146,47 @@ public class GameController : MonoBehaviour
         Vector3 RndPointonPlane = leftTop + XAxis * Random.value + ZAxis * Random.value;
 
         return RndPointonPlane;
+    }
+
+    public void GainToys(GameObject prefab)
+    {
+        Toys_Gain_Screen.SetToysModel(prefab);
+        Toys_Gain_Screen.gameObject.SetActive(true);
+        Toys_Gain_Screen.MoveToCenter();
+        StartCoroutine(MoveToButtonAndDisapppear());
+    }
+
+    IEnumerator MoveToButtonAndDisapppear()
+    {
+        yield return new WaitForSeconds(2.5f);
+        Toys_Gain_Screen.MoveAndDisappear();
+    }
+
+    public void DisplayCombo()
+    {
+        if (!isComboing)
+        {
+            isComboing = true;
+            comboNum++;
+            Combo_Screen.DisplayComboSceen(comboNum);
+            StartCoroutine(ResetCombo(3f));
+        }
+        else
+        {
+            comboNum++;
+            Combo_Screen.UpdateComboText(comboNum);
+        }
+    }
+
+    IEnumerator ResetCombo(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        comboNum = 0;
+        isComboing = false;
+    }
+
+    public void TurnOnGuide()
+    {
+        gameGuide.SetActive(true);
     }
 }
