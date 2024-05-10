@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
 
     private bool isComboing = false;
     private int comboNum = 0;
+    private int delayTime = 2;
 
     public static GameController Instance;
 
@@ -131,7 +132,7 @@ public class GameController : MonoBehaviour
         GameObject IniItem = Instantiate(itemPrefab, position, rotation, itemHolder.transform);
         Item itemClass = IniItem.AddComponent<Item>();
         itemClass.itemInfo = itemInfo;
-        if (id == 1) itemClass.isCoin = true;
+        if (id == 1 || id == 2) itemClass.isCoin = true;
     }
 
     private Vector3 GetRandomDropperPosition()
@@ -162,26 +163,35 @@ public class GameController : MonoBehaviour
         Toys_Gain_Screen.MoveAndDisappear();
     }
 
-    public void DisplayCombo()
+    public void CountingCombo()
     {
         if (!isComboing)
         {
             isComboing = true;
             comboNum++;
+            delayTime = 2;
             Combo_Screen.DisplayComboSceen(comboNum);
-            StartCoroutine(ResetCombo(3f));
+            StartCoroutine(ResetCombo());
         }
         else
         {
             comboNum++;
+            delayTime++;
+            if (delayTime > 5) delayTime = 5;
+            Debug.Log(comboNum);
             Combo_Screen.UpdateComboText(comboNum);
         }
     }
 
-    IEnumerator ResetCombo(float delay)
+    IEnumerator ResetCombo()
     {
-        yield return new WaitForSeconds(delay);
+        while (delayTime > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            delayTime--;
+        }
         comboNum = 0;
+        delayTime = 0;
         isComboing = false;
     }
 

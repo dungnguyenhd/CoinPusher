@@ -98,8 +98,27 @@ public class GameManager : MonoBehaviour
 
     public void GainExp(int amount)
     {
-        gameData.playerExp += amount;
-        GUI_Manager.Instance.DisplayCashGain(amount);
+        int target = gameData.playerExp + amount;
+        if (target >= gameData.playerLevel * 10)
+        {
+            int prevExp = gameData.playerExp;
+            gameData.playerExp = target - gameData.playerLevel * 10;
+            gameData.playerLevel++;
+            UpdateLevelText();
+            GUI_Manager.Instance.UpdateExpSliderMaxValue();
+            GUI_Manager.Instance.ExpIncreamentProgress(prevExp);
+        }
+        else
+        {
+            gameData.playerExp = target;
+            GUI_Manager.Instance.ExpIncreamentProgress(amount);
+        }
+        // GUI_Manager.Instance.DisplayExpGain(amount);
+    }
+
+    public void UpdateLevelText()
+    {
+        GUI_Manager.Instance.UpdateLevelText();
     }
 
     private void CheckCoinDropAfterOffline()

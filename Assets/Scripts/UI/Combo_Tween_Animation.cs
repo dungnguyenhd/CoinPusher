@@ -27,10 +27,14 @@ public class Combo_Tween_Animation : MonoBehaviour
     {
         gameObject.SetActive(true);
         twinkFX.SetActive(true);
+        comboText.text = "COMBO X" + amount;
         holder.transform.localScale = new Vector3(1, 1, 1);
         LeanTween.move(holder, target.position, 0.5f).setEaseOutQuad().setOnComplete(() =>
                 {
-                    UpdateComboText(amount);
+                    LeanTween.scale(comboText.gameObject, Vector3.one * 1.2f, 0.3f).setEaseOutQuad().setOnComplete(() =>
+{
+    LeanTween.scale(comboText.gameObject, Vector3.one, 0.3f).setEaseOutQuad();
+});
                     StartCoroutine(ResetHolder(3f));
                 });
     }
@@ -51,6 +55,7 @@ public class Combo_Tween_Animation : MonoBehaviour
 
     public void UpdateComboText(int amount)
     {
+        // Debug.Log(amount);
         comboText.text = "COMBO X" + amount;
         if (amount <= 3)
         {

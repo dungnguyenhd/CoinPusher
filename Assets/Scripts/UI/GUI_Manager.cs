@@ -9,6 +9,7 @@ public class GUI_Manager : MonoBehaviour
     [SerializeField] private List<TMP_Text> listCoinText;
     [SerializeField] private List<TMP_Text> listExpText;
     [SerializeField] private List<TMP_Text> listCashText;
+    [SerializeField] private TMP_Text levelText;
     [SerializeField] private Slider coinSlider;
     [SerializeField] private Slider expSlider;
     [SerializeField] private List<TMP_Text> expText;
@@ -39,9 +40,11 @@ public class GUI_Manager : MonoBehaviour
 
     void Start()
     {
+        UpdateExpSliderMaxValue();
+        UpdateCashText();
+        UpdateLevelText();
         CoinIncreamentProgress(GameManager.Instance.gameData.playerCoin);
         ExpIncreamentProgress(GameManager.Instance.gameData.playerExp);
-        UpdateCashText();
     }
 
     IEnumerator UpdateSliderValue(Slider slider, float targetValue, bool isIncreasing)
@@ -64,6 +67,8 @@ public class GUI_Manager : MonoBehaviour
             slider.value = currentValue;
             yield return null;
         }
+
+        UpdateSliderValue();
     }
 
     public void CoinIncreamentProgress(int newProgress)
@@ -115,6 +120,16 @@ public class GUI_Manager : MonoBehaviour
         {
             text.text = GameManager.Instance.gameData.playerExp.ToString();
         }
+    }
+
+    public void UpdateLevelText()
+    {
+        levelText.text = GameManager.Instance.gameData.playerLevel.ToString();
+    }
+
+    public void UpdateSliderValue()
+    {
+        expSlider.value = GameManager.Instance.gameData.playerExp;
     }
 
     public void DisplayExpGain(int amount)
@@ -211,5 +226,10 @@ public class GUI_Manager : MonoBehaviour
                     });
             }
         }
+    }
+
+    public void UpdateExpSliderMaxValue()
+    {
+        expSlider.maxValue = GameManager.Instance.gameData.playerLevel * 10;
     }
 }

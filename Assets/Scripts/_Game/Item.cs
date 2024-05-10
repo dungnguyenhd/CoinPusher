@@ -12,17 +12,19 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Prize_Receiver"))
         {
+            StartCoroutine(CountingDelay());
             if (isCoin)
             {
                 GameManager.Instance.ConsumeCoins(1);
-                DestroyObject();
+                GameManager.Instance.GainExp(5);
+                StartCoroutine(DestroyObject());
             }
             else
             {
                 GameController.Instance.GainToys(itemInfo.itemPrefab);
-                DestroyObject();
+                GameManager.Instance.GainExp(10);
+                StartCoroutine(DestroyObject());
             }
-            GameController.Instance.DisplayCombo();
         }
         else if (other.CompareTag("Lost_Receiver"))
         {
@@ -30,9 +32,16 @@ public class Item : MonoBehaviour
         }
     }
 
-    private void DestroyObject()
+    IEnumerator CountingDelay()
     {
-        Destroy(gameObject);
+        yield return new WaitForSeconds(Random.Range(1, 6) / Random.Range(10, 15));
+        GameController.Instance.CountingCombo();
+    }
+
+    private IEnumerator DestroyObject()
+    {
         GameController.Instance.PlayRandomPrizeFX();
+        yield return new WaitForSeconds(Random.Range(6, 10) / 10f);
+        Destroy(gameObject);
     }
 }

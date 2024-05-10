@@ -19,7 +19,27 @@ MonoBehaviour:
       type: 3}
     collectionId: 0
   - id: 2
+    name: Coin Silver
+    itemPrefab: {fileID: 1131216719525415310, guid: 14332c19358594f7d87cad7fd6e0c106,
+      type: 3}
+    collectionId: 0
+  - id: 3
     name: Car 01
     itemPrefab: {fileID: 6843713921848896471, guid: 078c3e9754bf348c79f93e7f90f530f6,
       type: 3}
     collectionId: 1
+  - id: 4
+    name: Iphone
+    itemPrefab: {fileID: 3509369707599737205, guid: aec3897c77ed7454eb816868583ef529,
+      type: 3}
+    collectionId: 2
+  - id: 5
+    name: PS5
+    itemPrefab: {fileID: 5366209230305510233, guid: 23067891317a94e99b94a1730a5402b1,
+      type: 3}
+    collectionId: 2
+  - id: 6
+    name: Ipad
+    itemPrefab: {fileID: 9066430843055411266, guid: 96a97e9b9ce914fd8b657b7b80554577,
+      type: 3}
+    collectionId: 2
