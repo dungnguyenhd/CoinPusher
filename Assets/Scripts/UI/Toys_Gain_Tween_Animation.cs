@@ -5,6 +5,7 @@ public class Toys_Gain_Tween_Animation : MonoBehaviour
 {
     [SerializeField] private GameObject holder;
     [SerializeField] private Transform toysButton;
+    [SerializeField] private Transform target;
     [SerializeField] private Transform model;
 
     private Vector3 initialPosition;
@@ -32,7 +33,7 @@ public class Toys_Gain_Tween_Animation : MonoBehaviour
 
     public void MoveAndDisappear()
     {
-        LeanTween.move(holder, toysButton.position, 1f).setEaseOutQuad().setOnComplete(() =>
+        LeanTween.move(holder, target.position, 1f).setEaseOutQuad().setOnComplete(() =>
         {
             LeanTween.scale(toysButton.gameObject, Vector3.one * 1.2f, 0.3f).setEaseOutQuad().setOnComplete(() =>
             {

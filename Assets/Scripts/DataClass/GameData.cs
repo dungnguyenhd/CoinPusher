@@ -12,8 +12,7 @@ public class GameData
     public int playerCash;
     public int dayReward;
     public long lastCoinDropTime;
-
-
+    public List<WheelPieceData> currentWheel = new();
     public List<GameStateData> gameplayData = new();
 
     public GameData()
@@ -26,6 +25,7 @@ public class GameData
         dayReward = 0;
         lastCoinDropTime = 0;
         gameplayData = new List<GameStateData>();
+        currentWheel = new List<WheelPieceData>();
     }
 
     public GameData(GameData gameData)
@@ -38,6 +38,7 @@ public class GameData
         dayReward = gameData.dayReward;
         lastCoinDropTime = gameData.lastCoinDropTime;
         gameplayData = gameData.gameplayData;
+        currentWheel = gameData.currentWheel;
     }
 }
 

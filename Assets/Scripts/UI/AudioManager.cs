@@ -17,8 +17,8 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        musicSlider.onValueChanged.AddListener(SetMusicVolume);
-        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+        // musicSlider.onValueChanged.AddListener(SetMusicVolume);
+        // sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     void SetMusicVolume(float value)
