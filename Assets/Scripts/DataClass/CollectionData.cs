@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static ItemData;
 
 [CreateAssetMenu(fileName = "CollectionData", menuName = "GameData/CollectionData", order = 1)]
 public class CollectionData : ScriptableObject
@@ -12,10 +13,12 @@ public class CollectionData : ScriptableObject
     {
         public int id;
         public string name;
+        public List<ItemInfo> collectionItems;
     }
 
     public CollectionInfo FindById(int id)
-    {
+    { 
+        
         return collections.FirstOrDefault(item => item.id == id);
     }
 

@@ -13,7 +13,6 @@ public class ItemData : ScriptableObject
         public int id;
         public string name;
         public GameObject itemPrefab;
-        public int collectionId;
     }
 
     public ItemInfo FindById(int id)
