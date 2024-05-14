@@ -3752,7 +3752,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464481261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4536,7 +4536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 537813820}
   m_LocalRotation: {x: -0, y: -0.80493504, z: 0.59336305, w: 0}
-  m_LocalPosition: {x: -6.1, y: 9.09, z: 9.8}
+  m_LocalPosition: {x: -6.12, y: 3.2300005, z: 7.9900002}
   m_LocalScale: {x: 1.0888685, y: 0.6347583, z: 2.07795}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9636,7 +9636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168240652}
   m_LocalRotation: {x: -0.803829, y: -0.005461754, z: -0.0074372897, w: -0.59478897}
-  m_LocalPosition: {x: 4.59, y: 9.17, z: 9.82}
+  m_LocalPosition: {x: 4.57, y: 3.31, z: 8.01}
   m_LocalScale: {x: 1.0888685, y: 0.63475835, z: 2.0779502}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10180,7 +10180,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230653095}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11772,7 +11772,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472975680}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11877,17 +11877,17 @@ PrefabInstance:
     - target: {fileID: 9157105887711818997, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.488868
+      value: 0.6314708
       objectReference: {fileID: 0}
     - target: {fileID: 9157105887711818997, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.48886806
+      value: 0.63147086
       objectReference: {fileID: 0}
     - target: {fileID: 9157105887711818997, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.48886806
+      value: 0.63147086
       objectReference: {fileID: 0}
     - target: {fileID: 9157105887711818997, guid: c4f829cb7dd4b864caf8832ec5b1ee55,
         type: 3}
